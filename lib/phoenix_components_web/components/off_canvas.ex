@@ -27,17 +27,19 @@ defmodule PhoenixComponentsWeb.OffCanvas do
   def render(assigns) do
     ~H"""
     <div>
-      <button phx-click={show_canvas()} tabindex="-1" class="border border-black">
+      <button phx-click={show_canvas()} tabindex="-1" class="rounded-full bg-gray-600 hover:bg-gray-700 active:bg-gray-800 py-1 px-2 text-gray-200">
         Show Off Canvas
       </button>
       <div class="static">
         <div id="off-canvas" class="hidden absolute inset-y-0 right-0 w-1/4 bg-white shadow-sm p-2">
-          <button phx-click={hide_canvas()} class="text-slate-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <button phx-click="inc" phx-target={@myself}>
+          <span class="block text-right">
+            <button phx-click={hide_canvas()} class="text-gray-300 hover:text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </span>
+          <button phx-click="inc" phx-target={@myself} class="rounded-full bg-gray-600 hover:bg-gray-700 active:bg-gray-800 py-1 px-2 text-gray-200">
             Modify content
           </button>
           <span>

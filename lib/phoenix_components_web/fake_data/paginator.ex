@@ -4,7 +4,7 @@ defmodule PhoenixComponentsWeb.FakeData.Paginator do
   @impl true
   def fetch_data(limit, page) do
     data =
-      limit*page..19
+      limit*page..500
       |> Enum.map(fn i -> "I'm #{i} data" end)
       |> Enum.take(limit)
 

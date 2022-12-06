@@ -1,6 +1,15 @@
-<section class="flex flex-row-reverse">
+<section class="bg-gray-100 rounded flex flex-col w-1/2 gap-3 p-2">
     <.live_component module={PhoenixComponentsWeb.BlackScreen} id="black-screen-bg" />
-    <.live_component module={PhoenixComponentsWeb.OffCanvas} id="off-canvas-menu" />
-    <.live_component module={PhoenixComponentsWeb.Modal} id="modal-menu" />
-    <.live_component module={PhoenixComponentsWeb.PaginationList} id="pagination-list" paginator={PhoenixComponentsWeb.FakeData.Paginator} limit={20} />
+        <div>
+            <h2 class="font-bold text-lg my-2"> Off Canvas </h2>
+            <.live_component module={PhoenixComponentsWeb.OffCanvas} id="off-canvas-menu" />
+        </div>
+        <div>
+            <h2 class="font-bold text-lg my-2"> Modal </h2>
+            <.live_component module={PhoenixComponentsWeb.Modal} id="modal-menu" />
+        </div>
+        <div>
+            <h2 class="font-bold text-lg my-2"> Paginated list </h2>
+            <.live_component module={PhoenixComponentsWeb.PaginationList} id="pagination-list" paginator={PhoenixComponentsWeb.FakeData.Paginator} limit={20} />
+        </div>
 </section>

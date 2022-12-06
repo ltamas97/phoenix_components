@@ -55,23 +55,27 @@ defmodule PhoenixComponentsWeb.PaginationList do
 
   def render(assigns) do
     ~H"""
-    <div>
-      <ul>
+    <div class="flex flex-col items-center">
+      <ul class="bg-gray-50 rounded-lg border border-gray-200 w-full text-gray-900">
         <%= for data <- @data do%>
-          <li>
+          <li class="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg">
             <%= data %>
           </li>
         <% end %>
       </ul>
-    <div>
-      <button phx-click="dec" phx-target={@myself}>
-        Prev
+    <div class="flex w-1/6 justify-between text-gray-300">
+      <button phx-click="dec" phx-target={@myself} class="hover:text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+        </svg>
       </button>
       <span>
         <%= @page + 1 %>
       </span>
-      <button phx-click="inc" phx-target={@myself}>
-        Nex
+      <button phx-click="inc" phx-target={@myself} class="hover:text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+        </svg>
       </button>
     </div>
     </div>
