@@ -12,4 +12,8 @@
             <h2 class="font-bold text-lg my-2"> Paginated list </h2>
             <.live_component module={PhoenixComponentsWeb.PaginationList} id="pagination-list" paginator={PhoenixComponentsWeb.FakeData.Paginator} limit={20} />
         </div>
+        <div>
+            <h2 class="font-bold text-lg my-2"> Interactve Table </h2>
+            <.live_component module={PhoenixComponentsWeb.InteractiveTable} id="interactive-table" content={PhoenixComponentsWeb.FakeData.TableItems.fetch_data(50)}/>
+        </div>
 </section>
