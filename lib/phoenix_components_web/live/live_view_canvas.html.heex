@@ -16,4 +16,8 @@
             <h2 class="font-bold text-lg my-2"> Interactve Table </h2>
             <.live_component module={PhoenixComponentsWeb.InteractiveTable} id="interactive-table" content={PhoenixComponentsWeb.FakeData.TableItems.fetch_data(50)}/>
         </div>
+        <div>
+            <h2 class="font-bold text-lg my-2"> Navigation Tabs </h2>
+            <.live_component module={PhoenixComponentsWeb.NavigationTabs} id="interactive-table" tabs={[%{name: :details, inner_content: "Details inner content"}, %{name: :history, inner_content: "History inner content"}, %{name: :notes, inner_content: "Notes inner content"}]}/>
+        </div>
 </section>
