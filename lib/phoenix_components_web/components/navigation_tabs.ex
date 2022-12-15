@@ -8,10 +8,6 @@ defmodule PhoenixComponentsWeb.NavigationTabs do
       |> assign(:active_tab, nil)
     {:ok, socket}
   end
-
-  def update(%{tab: tab} = _params, socket) do
-    {:ok, assign(socket,:active_tab, tab)}
-  end
   def update(params, socket) do
     socket =
       if connected?(socket) do
@@ -33,8 +29,7 @@ defmodule PhoenixComponentsWeb.NavigationTabs do
   end
 
   def handle_event("set-active-tab", %{"tab" => tab} = _params, socket) do
-    send_update(__MODULE__, %{id: socket.assigns.id, tab: tab})
-    {:noreply, socket}
+    {:noreply, assign(socket, :active_tab, tab) }
   end
 
   def handle_event(_event, _params, socket) do

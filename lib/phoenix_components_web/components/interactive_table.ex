@@ -1,5 +1,6 @@
 defmodule PhoenixComponentsWeb.InteractiveTable do
   use Phoenix.LiveComponent
+  alias Phoenix.LiveView.JS
 
   def mount(socket) do
     socket =
@@ -21,19 +22,20 @@ defmodule PhoenixComponentsWeb.InteractiveTable do
     {:ok, socket}
   end
 
-  def update(%{item_id: id} = _params, %{assigns: assigns} = socket) do
-    content = assigns.content
-    item = Enum.find(content, nil, &(&1.id == id))
-    {:ok, assign(socket, :selected_item, item)}
+  def select_row(js \\ %JS{}, row, selected_item) do
+    js
+    |> remove_highlight(selected_item)
+    |> JS.push("select-row", value: %{id: row})
+    |> JS.add_class("phx-active", to: "#interactive-item-#{row}")
   end
 
-  def highlight(id, selected_item) when selected_item.id == id, do: "bg-slate-200"
-  def highlight(_, _), do: ""
+  def remove_highlight(js, nil), do: js
+  def remove_highlight(js, selected_item), do: JS.remove_class(js, "phx-active", to: "#interactive-item-#{selected_item.id}")
 
-  def handle_event("select-row", %{"id" => id} = _params, socket) do
-    {item_id, _} = Integer.parse(id)
-    send_update(__MODULE__, %{id: socket.assigns.id, item_id: item_id})
-    {:noreply, socket}
+  def handle_event("select-row", %{"id" => id} = _params, %{assigns: assigns} = socket) do
+    content = assigns.content
+    item = Enum.find(content, nil, &(&1.id == id))
+    {:noreply, assign(socket, :selected_item, item)}
   end
 
   def handle_event(_event, _params, socket) do
@@ -57,7 +59,7 @@ defmodule PhoenixComponentsWeb.InteractiveTable do
           </thead>
           <tbody class="h-96 overflow-y-auto">
             <%= for row <- @content do %>
-              <tr id={"interactive-item-#{row.id}"} class={"text-gray-900 hover:bg-gray-100 bg-gray-50 border border-gray-200 cursor-pointer " <> highlight(row.id, @selected_item)} phx-value-id={row.id} phx-click="select-row", phx-target={@myself}>
+              <tr id={"interactive-item-#{row.id}"} class="phx-active:bg-slate-200 text-gray-900 hover:bg-gray-100 bg-gray-50 border border-gray-200 cursor-pointer" phx-click={select_row(row.id, @selected_item)}, phx-target={@myself}>
                 <td class="py-1 px-6 text-gray-400">
                   <%= row.id %>
                 </td>
